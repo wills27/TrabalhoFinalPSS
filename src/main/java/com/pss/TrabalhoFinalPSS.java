@@ -3,9 +3,6 @@
  */
 
 package com.pss;
-
-import com.pss.database.DataBaseUtilities;
-
 /**
  *
  * @author santa
@@ -13,7 +10,6 @@ import com.pss.database.DataBaseUtilities;
 public class TrabalhoFinalPSS {
 
     public static void main(String[] args) {
-        DataBaseUtilities database = new DataBaseUtilities();
-        database.delete(3);
+
     }
 }
