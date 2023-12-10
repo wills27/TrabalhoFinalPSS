@@ -4,11 +4,13 @@
  */
 package view;
 
+import model.CustomPanel;
+
 /**
  *
  * @author santa
  */
-public class ConfirmPanel extends javax.swing.JPanel {
+public class ConfirmPanel extends CustomPanel {
 
     /**
      * Creates new form NewJPanel

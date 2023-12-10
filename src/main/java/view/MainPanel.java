@@ -4,19 +4,15 @@
  */
 package view;
 
-import observerpattern.IObserver;
-import observerpattern.Observed;
+import model.CustomPanel;
 
 /**
  *
  * @author santa
  */
-public class MainPanel extends javax.swing.JPanel {
-
-    private final Observed observed;
-    
+public class MainPanel extends CustomPanel{    
     public MainPanel() {
-        observed = new Observed();
+        
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -125,11 +121,7 @@ public class MainPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void addListener(IObserver listener)
-    {
-        observed.AddListener(listener);
-    }
+
     
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
         observed.Notify("newUser");

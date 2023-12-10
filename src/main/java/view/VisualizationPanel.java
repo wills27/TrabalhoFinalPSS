@@ -4,11 +4,12 @@
  */
 package view;
 
+import model.CustomPanel;
 /**
  *
  * @author santa
  */
-public class VisualizationPanel extends javax.swing.JPanel {
+public class VisualizationPanel extends CustomPanel {
 
     /**
      * Creates new form VisualisationPanel
