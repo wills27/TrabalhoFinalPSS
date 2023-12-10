@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Observed {
-    private List<IObserver> listeners;
+    private final List<IObserver> listeners;
     
     public Observed()
     {

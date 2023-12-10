@@ -95,7 +95,7 @@ public class UserDaoSqlite implements IUserDao {
 
     @Override
     public void deletar(int id) {
-        String sql = "DELETE FROM warehouses WHERE id = ?";
+        String sql = "DELETE FROM users WHERE id = ?";
 
         try (
             PreparedStatement pstmt = connection.prepareStatement(sql)) {

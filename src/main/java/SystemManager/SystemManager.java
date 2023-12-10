@@ -6,7 +6,7 @@ package SystemManager;
 
 import java.util.*;
 import model.User;
-import view.Presenter;
+import view.SearchPresenter;
 
 /**
  *
@@ -14,6 +14,6 @@ import view.Presenter;
  */
 public class SystemManager {
     private List<User> users = new ArrayList<>();
-    private Presenter presenter;
+    private SearchPresenter presenter;
     private SystemState systemState;
 }
