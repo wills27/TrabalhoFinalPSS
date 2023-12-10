@@ -4,15 +4,12 @@
  */
 package observerpattern;
 
+import model.Event;
+
 /**
  *
  * @author santa
  */
-public enum EventType
-{
-    DatabaseAlteration,
-    NotificationSent,
-    NotificationRead,
-    ChangePassword,
-    UserAuthorization
+public interface IObserver {
+    public void Update(String eventName);
 }
