@@ -4,9 +4,9 @@
 
 package com.pss;
 
-import loginsystem.LoginSystem;
-import view.MainWindow;
-import view.SearchPresenter;
+import presenter.MainWindowPresenter;
+import service.AuthenticationService;
+import view.*;
 
 /**
  *
@@ -15,10 +15,8 @@ import view.SearchPresenter;
 public class TrabalhoFinalPSS extends javax.swing.JFrame {
 
     public static void main(String args[]) {
-        SearchPresenter presenter = new SearchPresenter();
-        presenter.SetUpGUI();
-        MainWindow mainwindow = new MainWindow();
-        mainwindow.addToPane(presenter.getFrame());
+        MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(new AuthenticationService());
+        
 //        LoginSystem login = new LoginSystem();
     }
 }

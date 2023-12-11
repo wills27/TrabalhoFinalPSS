@@ -2,29 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package view;
+package presenter;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
+import view.SearchView;
 
 /**
  *
  * @author santa
  */
 public class SearchPresenter {
-    private final Search search;
+    private final SearchView search;
     
     public SearchPresenter()
     {
-        search = new Search();
+        search = new SearchView();
 
     }
     
     public void SetUpGUI()
     {
         search.setVisible(true);
-        
         configureScreen();
     }
     

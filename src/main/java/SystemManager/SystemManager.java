@@ -6,7 +6,7 @@ package SystemManager;
 
 import java.util.*;
 import model.User;
-import view.SearchPresenter;
+import presenter.SearchPresenter;
 
 /**
  *

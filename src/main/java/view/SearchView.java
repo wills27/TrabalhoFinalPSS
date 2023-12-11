@@ -10,9 +10,9 @@ import javax.swing.*;
  *
  * @author santa
  */
-public class Search extends javax.swing.JInternalFrame {
+public class SearchView extends javax.swing.JInternalFrame {
 
-    public Search() {
+    public SearchView() {
         initComponents();
     }
 
