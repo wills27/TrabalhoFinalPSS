@@ -9,6 +9,7 @@ import java.util.List;
 import model.User;
 import presenter.MainWindowPresenter;
 import service.LoginService;
+import state.LoggedState;
 
 /**
  *
@@ -45,7 +46,7 @@ public class RegisterCommand extends BaseCommand{
                 mainWindowPresenter.openUserView();
 
             }
-
+            mainWindowPresenter.SetState(new LoggedState());
             mainWindowPresenter.closeLoginView();
         }
     }

@@ -4,11 +4,16 @@
  */
 package command;
 
+import dao.CSVLogDao;
 import dao.UserDaoSqlite;
+import java.io.IOException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import model.User;
 import presenter.MainWindowPresenter;
 import service.LoginService;
+import state.LoggedState;
 
 
 /**
@@ -18,6 +23,7 @@ import service.LoginService;
 public class LoginCommand extends BaseCommand{
     private UserDaoSqlite userDaoSqlite;
     private LoginService loginService;
+    private CSVLogDao logDao;
     private String username;
     private String password;
     
@@ -26,7 +32,7 @@ public class LoginCommand extends BaseCommand{
         super(mainWindowPresenter);
         loginService = new LoginService();
         userDaoSqlite = new UserDaoSqlite();
-        
+        logDao = new CSVLogDao();
     }
 
     @Override
@@ -38,12 +44,26 @@ public class LoginCommand extends BaseCommand{
             if (user.getUserType().equals("admin"))
             {
                 mainWindowPresenter.openAdminView();
+                try {
+                    logDao.saveLog("LoginEfetuado", username, getTime());
+                }
+                catch (IOException e){
+                    
+                }
             }
             else
             {
                 mainWindowPresenter.openUserView();
+                try {
+                    logDao.saveLog("LoginEfetuado", username, getTime());
+                }
+                catch (IOException e){
+                    
+                }
             }
+            mainWindowPresenter.SetState(new LoggedState());
             mainWindowPresenter.closeLoginView();
+            
         }
     }
     public void setUsername(String text)
@@ -54,5 +74,13 @@ public class LoginCommand extends BaseCommand{
     public void setPassword(String text)
     {
         password = text;
+    }
+    
+    public String getTime()
+    {
+        LocalTime horaAtual = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String horaFormatada = horaAtual.format(formatter);
+        return horaFormatada;
     }
 }

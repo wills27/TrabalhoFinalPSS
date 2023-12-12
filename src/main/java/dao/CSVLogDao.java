@@ -5,36 +5,39 @@
 package dao;
 
 import com.opencsv.CSVWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-/**
- *
- * @author santa
- */
+
 public class CSVLogDao implements ILogDao {
 
     @Override
-    public void saveLog(String operacao, String usuarioLogado, String usuarioManipulacao) throws IOException{
+    public void saveLog(String operacao, String usuarioLogado, String horario) throws IOException {
+        String caminhoArquivo = "pessoas.csv";
+        String[] str = {operacao, usuarioLogado, horario};
 
-        String[] str = {operacao , usuarioLogado , usuarioManipulacao};
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo, true));
+             CSVWriter csvWriter = new CSVWriter(writer)) {
 
-        try (Writer writer = Files.newBufferedWriter(Paths.get("pessoas.csv"))) {
-            CSVWriter csvWriter = new CSVWriter(writer);
-            
             csvWriter.writeNext(str);
-            
-            csvWriter.flush();
+
+            System.out.println("Log adicionado com sucesso ao arquivo CSV.");
         }
     }
 
     @Override
-    public void saveLogError(String operacao, String usuarioLogado, String usuarioManipulacao) {
-        
+    public void saveLogError (String operacao, String usuarioLogado, String horario) throws IOException {
+        String caminhoArquivo = "pessoas.csv";
+        String[] str = {operacao, usuarioLogado, horario};
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoArquivo, true));
+             CSVWriter csvWriter = new CSVWriter(writer)) {
+
+            csvWriter.writeNext(str);
+
+            System.out.println("Log adicionado com sucesso ao arquivo CSV.");
+        }
     }
     
 }

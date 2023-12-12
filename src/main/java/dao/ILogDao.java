@@ -11,6 +11,6 @@ import java.io.IOException;
  * @author santa
  */
 public interface ILogDao {
-    public abstract void saveLog(String operacao, String usuarioLogado, String usuarioManipulacao) throws IOException;
+    public  abstract  void saveLog(String operacao, String usuarioLogado, String usuarioManipulacao) throws IOException;
     public abstract void saveLogError(String operacao, String usuarioLogado, String usuarioManipulacao) throws IOException;
 }
