@@ -4,21 +4,17 @@
  */
 package command;
 
-import SystemManager.SystemManager;
+import presenter.MainWindowPresenter;
 
-/**
- *
- * @author santa
- */
+
 public abstract class BaseCommand {
     
-    protected SystemManager systemManager;
+    protected MainWindowPresenter mainWindowPresenter;
     
-    public BaseCommand(SystemManager systemManager)
+    public BaseCommand(MainWindowPresenter mainWindowPresenter)
     {
-        this.systemManager = systemManager;
+        this.mainWindowPresenter = mainWindowPresenter;
     }
     
     public abstract void Execute();
-
 }

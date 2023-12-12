@@ -4,7 +4,9 @@
  */
 package presenter;
 
-import service.AuthenticationService;
+import service.AuthenticationServiceAdapter;
+import state.BeforeLoginState;
+import state.PresenterBaseState;
 import view.MainWindowView;
 
 /**
@@ -17,13 +19,14 @@ public final class MainWindowPresenter {
     private final LoginPresenter loginPresenter;
     private final UserPresenter userPresenter;
     private final ChangePasswordPresenter changePasswordPresenter;
+    private PresenterBaseState state;
     
-    public MainWindowPresenter(AuthenticationService authentication)
+    public MainWindowPresenter(AuthenticationServiceAdapter authentication)
     {
         view = new MainWindowView();
         
         searchPresenter = new SearchPresenter();
-        loginPresenter = new LoginPresenter(this, authentication);
+        loginPresenter = new LoginPresenter(this);
         userPresenter = new UserPresenter(this);
         changePasswordPresenter = new ChangePasswordPresenter(this);
         
@@ -31,6 +34,8 @@ public final class MainWindowPresenter {
         view.addToPane(loginPresenter.getFrame());
         view.addToPane(userPresenter.getFrame());
         view.addToPane(changePasswordPresenter.getFrame());
+        
+        state = new BeforeLoginState(this, loginPresenter);
         
         openLoginView();
     }
@@ -53,5 +58,15 @@ public final class MainWindowPresenter {
     public void openChangePasswordView()
     {
         changePasswordPresenter.SetUpGUI();
+    }
+    
+    public void closeLoginView()
+    {
+        loginPresenter.getFrame().dispose();
+    }
+    
+    public PresenterBaseState getState()
+    {
+        return state;
     }
 }

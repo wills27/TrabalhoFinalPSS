@@ -10,8 +10,14 @@ package model;
  */
 public class User {
     private int id;
-    private String userName;
+    private String username;
     private String password;
+    
+    public User(String username, String password)
+    {
+        this.username = username;
+        this.password = password;
+    }
     
     public int getId()
     {
@@ -20,7 +26,7 @@ public class User {
     
     public String getUsername()
     {
-        return userName;
+        return username;
     }
     
     public String getPassword()

@@ -14,7 +14,7 @@ import java.util.List;
 public interface IUserDao {
     void inserir(User user);
     
-    User buscarPorId(int id);
+    User searchUserame(String username);
     
     List<User> listarTodos();
     

@@ -5,23 +5,18 @@
 package presenter;
 
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 import javax.swing.*;
-import service.AuthenticationService;
 import view.LoginView;
 
-/**
- *
- * @author santa
- */
+
 public class LoginPresenter{
     private final LoginView view;
     private MainWindowPresenter mainWindowPresenter;
-    private AuthenticationService authentication;
     
-    public LoginPresenter(MainWindowPresenter mainWindowPresenter, AuthenticationService authentication)
+    public LoginPresenter(MainWindowPresenter mainWindowPresenter)
     {
         view = new LoginView();
-        this.authentication = authentication;
         this.mainWindowPresenter = mainWindowPresenter;
         configureScreen();
 
@@ -44,25 +39,31 @@ public class LoginPresenter{
         });
     }
     
-    private void performLogin()
+    public void performLogin()
     {
-        System.out.println(view.getUsernameField().getText());
-        System.out.println(view.getPasswordField().getPassword());
-        if (authentication.authenticate("", ""))
-        {
-            mainWindowPresenter.openUserView();
-            view.setVisible(false);
-        }
-        
+        mainWindowPresenter.getState().performLogin(getUsername(), getPassword());
     }
     
     private void register()
     {
-        
+        mainWindowPresenter.getState().register(getUsername(), getPassword());
     }
     
     public JInternalFrame getFrame()
     {
         return view;
+    }
+    
+    public String getUsername()
+    {
+        System.out.println("name" + view.getUsernameField().getText());
+        return view.getUsernameField().getText();
+    }
+    
+    public String getPassword()
+    {
+        char[] password = view.getPasswordField().getPassword();
+        String str = String.valueOf(password);
+        return str;
     }
 }

@@ -5,9 +5,7 @@
 package com.pss;
 
 import presenter.MainWindowPresenter;
-import service.AuthenticationService;
-import view.*;
-
+import service.AuthenticationServiceAdapter;
 /**
  *
  * @author santa
@@ -15,8 +13,7 @@ import view.*;
 public class TrabalhoFinalPSS extends javax.swing.JFrame {
 
     public static void main(String args[]) {
-        MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(new AuthenticationService());
+        MainWindowPresenter mainWindowPresenter = new MainWindowPresenter(new AuthenticationServiceAdapter());
         
-//        LoginSystem login = new LoginSystem();
     }
 }

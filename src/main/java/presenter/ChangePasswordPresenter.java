@@ -40,7 +40,7 @@ public class ChangePasswordPresenter {
     private void solicitatePasswordChange()
     {
         JOptionPane.showMessageDialog(view, "Solicitação confirmada!", "Confirmado", JOptionPane.INFORMATION_MESSAGE);
-        
+        view.setVisible(false);
     }
     
     public JInternalFrame getFrame()

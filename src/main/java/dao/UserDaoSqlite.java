@@ -32,8 +32,13 @@ public class UserDaoSqlite implements IUserDao {
     }
     
     @Override
+    public User searchUserame(String username) {
+        return new User("1","2");
+    }
+    
+    @Override
     public void inserir(User user) {
-        String sql = "INSERT INTO users(name,capacity) VALUES(?,?)";
+        String sql = "INSERT INTO users(username,password) VALUES(?,?)";
 
         try (
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -43,11 +48,6 @@ public class UserDaoSqlite implements IUserDao {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    @Override
-    public User buscarPorId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -63,8 +63,9 @@ public class UserDaoSqlite implements IUserDao {
             // loop through the result set
             while (rs.next()) {
                 System.out.println(rs.getInt("id") +  "\t" + 
-                                   rs.getString("name") + "\t" +
-                                   rs.getDouble("capacity"));
+                                   rs.getString("username") + "\t" +
+                                   rs.getString("password"));
+                users.add(new User(rs.getString("username"),rs.getString("password")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -109,5 +110,7 @@ public class UserDaoSqlite implements IUserDao {
             System.out.println(e.getMessage());
         }
     }
+
+    
     
 }
