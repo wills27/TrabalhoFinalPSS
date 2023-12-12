@@ -4,6 +4,9 @@
  */
 package command;
 
+import dao.UserDaoSqlite;
+import java.util.List;
+import model.User;
 import presenter.MainWindowPresenter;
 import service.LoginService;
 
@@ -13,6 +16,7 @@ import service.LoginService;
  * @author santa
  */
 public class LoginCommand extends BaseCommand{
+    private UserDaoSqlite userDaoSqlite;
     private LoginService loginService;
     private String username;
     private String password;
@@ -21,13 +25,24 @@ public class LoginCommand extends BaseCommand{
     {
         super(mainWindowPresenter);
         loginService = new LoginService();
+        userDaoSqlite = new UserDaoSqlite();
+        
     }
 
     @Override
     public void Execute() {
-        if (loginService.authenticateLogin(username, password))
+        List<User> users = userDaoSqlite.listarTodos();
+        if (loginService.authenticateLogin(username, password, users))
         {
-            mainWindowPresenter.openUserView();
+            User user = userDaoSqlite.searchUserame(username);
+            if (user.getUserType().equals("admin"))
+            {
+                mainWindowPresenter.openAdminView();
+            }
+            else
+            {
+                mainWindowPresenter.openUserView();
+            }
             mainWindowPresenter.closeLoginView();
         }
     }

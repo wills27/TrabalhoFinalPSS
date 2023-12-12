@@ -33,17 +33,35 @@ public class UserDaoSqlite implements IUserDao {
     
     @Override
     public User searchUserame(String username) {
-        return new User("1","2");
+        String sql = "SELECT id, username, password, usertype FROM users";
+        
+        try (
+            Statement stmt  = connection.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql)){
+            
+            // loop through the result set
+            while (rs.next()) {
+                if (rs.getString("username").equals(username)){
+                    return new User(rs.getString("username"),
+                            rs.getString("password"),
+                            rs.getString("usertype"));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
     
     @Override
     public void inserir(User user) {
-        String sql = "INSERT INTO users(username,password) VALUES(?,?)";
+        String sql = "INSERT INTO users(username, password, usertype) VALUES(?,?,?)";
 
         try (
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getUserType());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -54,7 +72,7 @@ public class UserDaoSqlite implements IUserDao {
     public List<User> listarTodos() {
         List<User> users = new ArrayList<>();
 
-        String sql = "SELECT id, username, password FROM users";
+        String sql = "SELECT id, username, password, usertype FROM users";
         
         try (
             Statement stmt  = connection.createStatement();
@@ -62,10 +80,10 @@ public class UserDaoSqlite implements IUserDao {
             
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" + 
-                                   rs.getString("username") + "\t" +
-                                   rs.getString("password"));
-                users.add(new User(rs.getString("username"),rs.getString("password")));
+
+                users.add(new User(rs.getString("username")
+                        ,rs.getString("password"), 
+                        rs.getString("usertype")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

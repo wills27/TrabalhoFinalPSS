@@ -4,7 +4,6 @@
  */
 package service;
 
-import dao.UserDaoSqlite;
 import java.util.List;
 import model.User;
 
@@ -14,18 +13,14 @@ import model.User;
  */
 public class LoginService {
     private AuthenticationServiceAdapter authentication;
-    private UserDaoSqlite userDaoSqlite;
     
     public LoginService()
     {
-        userDaoSqlite = new UserDaoSqlite();
         authentication = new AuthenticationServiceAdapter();
     }
     
-    public boolean authenticateLogin(String username, String password)
-    {
-        List<User> users = userDaoSqlite.listarTodos();
-        
+    public boolean authenticateLogin(String username, String password, List<User> users)
+    {   
         for (var user: users) 
         {
            if (user.getUsername().equals(username))
@@ -37,10 +32,8 @@ public class LoginService {
         return false;
     }
     
-    public boolean authenticateRegister(String username, String password)
-    {
-        List<User> users = userDaoSqlite.listarTodos();
-        
+    public boolean authenticateRegister(String username, String password, List<User> users)
+    {        
         for (var user: users) 
         {
            if (user.getUsername().equals(username))
@@ -49,9 +42,6 @@ public class LoginService {
            }
            
         }
-        
-        userDaoSqlite.inserir(new User(username, password));
-        
         return authentication.authenticate(username, password);
     }
 }

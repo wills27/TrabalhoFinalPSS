@@ -56,7 +56,6 @@ public class LoginPresenter{
     
     public String getUsername()
     {
-        System.out.println("name" + view.getUsernameField().getText());
         return view.getUsernameField().getText();
     }
     
