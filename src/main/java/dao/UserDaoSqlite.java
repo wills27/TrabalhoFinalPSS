@@ -25,7 +25,7 @@ public class UserDaoSqlite implements IUserDao {
     public UserDaoSqlite()
     {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:C://sqlite/db/test.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:db/test.db");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
